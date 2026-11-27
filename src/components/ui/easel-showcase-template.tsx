@@ -455,7 +455,12 @@ export default function EaselShowcaseTemplate({
   const [showContactModal, setShowContactModal] = useState(false)
 
   const pic = (k: string) => {
-    if (k.startsWith("/") || k.startsWith("http")) return k
+    if (!k) return ""
+    if (k.startsWith("http")) return k
+    if (k.startsWith("/")) {
+      const base = import.meta.env.BASE_URL.replace(/\/$/, "")
+      return base + k
+    }
     return (assetBase ? assetBase.replace(/\/?$/, "/") : IMG_BASE) + k + ".webp"
   }
   const mail = "https://wa.me/6285155222112?text=Halo%20DigiSkoola%2C%20saya%20tertarik%20untuk%20konsultasi%20mengenai%20solusi%20ekosistem%20teknologi."
@@ -798,7 +803,7 @@ export default function EaselShowcaseTemplate({
       <header ref={navRef} className="ea-nav">
         <a className="ea-brand" href="#top" aria-label="DigiSkoola, home">
           <span className="ea-logo" style={{ background: "transparent", border: "none" }}>
-            <img src="/assets/img/logo-digiskola.png" alt="DigiSkoola" width={32} height={32} style={{ objectFit: "contain" }} />
+            <img src={pic("/assets/img/logo-digiskola.png")} alt="DigiSkoola" width={32} height={32} style={{ objectFit: "contain" }} />
           </span>
           DigiSkoola
         </a>
@@ -1015,7 +1020,7 @@ export default function EaselShowcaseTemplate({
               <span className="ea-sw ea-mintw">kedaulatan </span>
               <span className="ea-sw">ekonomi </span>
               <span className="ea-chip ea-sw">
-                <img src="/assets/img/icon.png" alt="" width={44} height={44} style={{ objectFit: "contain" }} />
+                <img src={pic("/assets/img/icon.png")} alt="" width={44} height={44} style={{ objectFit: "contain" }} />
               </span>{" "}
               <span className="ea-sw">DigiSkoola </span>
               <br />
@@ -1025,7 +1030,7 @@ export default function EaselShowcaseTemplate({
                 </span>
               ))}
               <span className="ea-chip ea-sw">
-                <img src="/assets/img/skoolaku/logo.png" alt="" width={44} height={44} style={{ objectFit: "contain" }} />
+                <img src={pic("/assets/img/skoolaku/logo.png")} alt="" width={44} height={44} style={{ objectFit: "contain" }} />
               </span>{" "}
               <span className="ea-sw">dan </span>
               <span className="ea-sw">inovasi.</span>
@@ -1156,9 +1161,9 @@ export default function EaselShowcaseTemplate({
                   <Svg d={ICON.play} size={8} fill="currentColor" stroke={0} /> Portal Digital Terintegrasi
                 </span>
                 <div className="ea-pile" aria-hidden="true" style={{ cursor: "pointer" }} onClick={() => setActiveProject(DIGISKOOLA_PROJECTS.myspensix)}>
-                  <img src="/assets/img/MySpensix3.png" alt="" width={150} height={150} style={{ objectFit: "cover" }} />
-                  <img src="/assets/img/MySpensix2.png" alt="" width={150} height={150} style={{ objectFit: "cover" }} />
-                  <img src="/assets/img/MySpensix1.png" alt="" width={150} height={150} style={{ objectFit: "cover" }} />
+                  <img src={pic("/assets/img/MySpensix3.png")} alt="" width={150} height={150} style={{ objectFit: "cover" }} />
+                  <img src={pic("/assets/img/MySpensix2.png")} alt="" width={150} height={150} style={{ objectFit: "cover" }} />
+                  <img src={pic("/assets/img/MySpensix1.png")} alt="" width={150} height={150} style={{ objectFit: "cover" }} />
                   <span className="ea-tag ea-blue ea-t9">@SMPN6Mojokerto</span>
                 </div>
                 <h3 className="ea-h4">MySpensix — Manajemen Sekolah Terpadu</h3>
@@ -1180,7 +1185,7 @@ export default function EaselShowcaseTemplate({
                   style={{ background: "#7c2d12", cursor: "pointer", overflow: "hidden" }}
                   onClick={() => setActiveProject(DIGISKOOLA_PROJECTS.wilwa)}
                 >
-                  <img src="/assets/img/wilwa/BG.png" alt="Wilwa Majapahit" width={550} height={300} style={{ objectFit: "cover" }} />
+                  <img src={pic("/assets/img/wilwa/BG.png")} alt="Wilwa Majapahit" width={550} height={300} style={{ objectFit: "cover" }} />
                 </div>
                 <h3 className="ea-h4">Wilwa — Civic Intelligence &amp; Pasar Rakyat</h3>
                 <p className="ea-small">
@@ -1205,7 +1210,7 @@ export default function EaselShowcaseTemplate({
                   style={{ cursor: "pointer", overflow: "hidden" }}
                   onClick={() => setActiveProject(DIGISKOOLA_PROJECTS.skoolaku)}
                 >
-                  <img src="/assets/img/skoolaku/b1.jpeg" alt="Skoolaku Whitelabel" width={550} height={300} style={{ objectFit: "cover" }} />
+                  <img src={pic("/assets/img/skoolaku/b1.jpeg")} alt="Skoolaku Whitelabel" width={550} height={300} style={{ objectFit: "cover" }} />
                 </div>
                 <h3 className="ea-h4">Skoolaku — Whitelabel SaaS Sekolah</h3>
                 <p className="ea-small">
@@ -1317,7 +1322,7 @@ export default function EaselShowcaseTemplate({
             ) : null,
           )}
           <div ref={banner} className="ea-orange" style={{ background: "#9a3412" }}>
-            <img src="/assets/img/wilwa/BG.png" alt="Wilwa Majapahit" width={780} height={920} style={{ objectFit: "cover" }} />
+            <img src={pic("/assets/img/wilwa/BG.png")} alt="Wilwa Majapahit" width={780} height={920} style={{ objectFit: "cover" }} />
             <div className="ea-orange-ui">
               <span className="ea-tag ea-redtag ea-t10">@WilwaMajapahit</span>
               <button type="button" className={"ea-like" + (liked ? " on" : "")} aria-pressed={liked} onClick={() => setLiked((l) => !l)}>
@@ -1325,7 +1330,7 @@ export default function EaselShowcaseTemplate({
                 Dukung
               </button>
               <div className="ea-by" style={{ cursor: "pointer" }} onClick={() => setActiveProject(DIGISKOOLA_PROJECTS.wilwa)}>
-                <img src="/assets/img/wilwa/logo.png" alt="Wilwa Logo" width={28} height={28} style={{ objectFit: "contain" }} />
+                <img src={pic("/assets/img/wilwa/logo.png")} alt="Wilwa Logo" width={28} height={28} style={{ objectFit: "contain" }} />
                 <span>
                   <b>Wilwa Majapahit</b>
                   <small>Klik untuk info lengkap</small>
@@ -1390,20 +1395,20 @@ export default function EaselShowcaseTemplate({
                   Evolusi Digital Terpercaya
                   <span className="ea-mthumbs">
                     <i style={{ background: "#2563eb" }} />
-                    <img src="/assets/img/icon.png" alt="" width={44} height={44} style={{ objectFit: "contain" }} />
+                    <img src={pic("/assets/img/icon.png")} alt="" width={44} height={44} style={{ objectFit: "contain" }} />
                     <small>DIGISKOOLA</small>
                   </span>
                   MySpensix · SMPN 6 Mojokerto
                   <span className="ea-mthumbs">
-                    <img src="/assets/img/MySpensix1.png" alt="" width={44} height={44} style={{ objectFit: "cover" }} />
+                    <img src={pic("/assets/img/MySpensix1.png")} alt="" width={44} height={44} style={{ objectFit: "cover" }} />
                   </span>
                   Skoolaku Whitelabel Sekolah
                   <span className="ea-mthumbs">
-                    <img src="/assets/img/skoolaku/logo.png" alt="" width={44} height={44} style={{ objectFit: "contain" }} />
+                    <img src={pic("/assets/img/skoolaku/logo.png")} alt="" width={44} height={44} style={{ objectFit: "contain" }} />
                   </span>
                   Wilwa Majapahit · Kedaulatan Rakyat
                   <span className="ea-mthumbs">
-                    <img src="/assets/img/wilwa/logo.png" alt="" width={44} height={44} style={{ objectFit: "contain" }} />
+                    <img src={pic("/assets/img/wilwa/logo.png")} alt="" width={44} height={44} style={{ objectFit: "contain" }} />
                   </span>
                 </span>
               ))}
@@ -1423,7 +1428,7 @@ export default function EaselShowcaseTemplate({
       <section className="ea-sec ea-duo" aria-label="Konsultasi">
         <div className="ea-wrap ea-duo-grid">
           <article className="ea-meet" data-rv>
-            <img src="/assets/img/beranda.png" alt="Konsultasi DigiSkoola" width={590} height={650} style={{ objectFit: "cover" }} />
+            <img src={pic("/assets/img/beranda.png")} alt="Konsultasi DigiSkoola" width={590} height={650} style={{ objectFit: "cover" }} />
             <div>
               <Svg d={ICON.pen} size={14} />
               <h3 className="ea-h3">
@@ -1438,7 +1443,7 @@ export default function EaselShowcaseTemplate({
             </div>
           </article>
           <article className="ea-arch" data-rv>
-            <img src="/assets/img/wilwa/BG.png" alt="Wilwa Majapahit" width={575} height={650} style={{ objectFit: "cover" }} />
+            <img src={pic("/assets/img/wilwa/BG.png")} alt="Wilwa Majapahit" width={575} height={650} style={{ objectFit: "cover" }} />
             <div>
               <Svg d={ICON.spark} size={14} />
               <h3 className="ea-h3">
@@ -1465,7 +1470,7 @@ export default function EaselShowcaseTemplate({
         <div className="ea-wrap ea-foot-grid">
           <div>
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 12 }}>
-              <img src="/assets/img/logo-digiskola.png" alt="DigiSkoola" width={40} height={40} style={{ objectFit: "contain" }} />
+              <img src={pic("/assets/img/logo-digiskola.png")} alt="DigiSkoola" width={40} height={40} style={{ objectFit: "contain" }} />
               <h2 className="ea-h4" style={{ margin: 0 }}>
                 DigiSkoola
               </h2>
@@ -1615,7 +1620,7 @@ export default function EaselShowcaseTemplate({
               ✕
             </button>
             <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 16 }}>
-              <img src="/assets/img/logo-digiskola.png" alt="DigiSkoola" width={38} height={38} style={{ objectFit: "contain" }} />
+              <img src={pic("/assets/img/logo-digiskola.png")} alt="DigiSkoola" width={38} height={38} style={{ objectFit: "contain" }} />
               <div>
                 <h3 id="contact-modal-title" style={{ fontSize: "1.25rem", fontWeight: 700, margin: 0 }}>Kontak Kami</h3>
                 <small style={{ color: "var(--mute)" }}>DigiSkoola Hotline</small>
