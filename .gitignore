@@ -1,0 +1,6 @@
+node_modules/
+dist/
+backup/
+referensi/
+.DS_Store
+*.local
